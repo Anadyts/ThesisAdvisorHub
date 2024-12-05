@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(isset($_SESSION['username'])){
+        header('location: /ThesisAdvisorHub/home');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +19,7 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="Logo.jpg" alt="" width="90px">
+            <img src="../Logo.jpg" alt="" width="90px">
         </div>
         <ul>
             <li><a href="/ThesisAdvisorHub/home">Home</a></li>
@@ -49,3 +56,31 @@
     </div>
 </body>
 </html>
+
+<?php
+    require('../server.php');
+
+    if(isset($_POST['login'])){
+        $username = filter_input(INPUT_POST,'username',FILTER_SANITIZE_SPECIAL_CHARS);
+        $password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $sql = "SELECT * FROM advisor WHERE username = '$username'
+                UNION SELECT * FROM student WHERE username = '$username'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        if(isset($row['username']) && password_verify($password, $row['password']) && $row['verified'] == 1){
+            $_SESSION['username'] = $row['username'];
+            header('location: /ThesisAdvisorHub/advisor');
+        }elseif(!password_verify($password, $row['password'])){
+            $_SESSION['error'] = 'Username or password is incorrect';
+            header('location: /ThesisAdvisorHub/login');
+        }elseif($row['verified'] == 0){
+            $_SESSION['error'] = "Please verify your email first. <a href='/ThesisAdvisorHub/resend' class='resend'>Resend</a> ";
+            header('location: /ThesisAdvisorHub/login');
+        }
+        
+    }
+
+?>
+

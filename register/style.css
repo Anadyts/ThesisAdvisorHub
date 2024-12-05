@@ -128,6 +128,7 @@ form i{
 .errorMessage h3{
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     color: red;
+    font-weight: 450;
 }
 
 .bxs-user-circle{

@@ -1,7 +1,9 @@
 <?php
     session_start();
     require('../server.php');
-
+    if(isset($_SESSION['username'])){
+        header('location: /ThesisAdvisorHub/home');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="Logo.jpg" alt="" width="90px">
+            <img src="../Logo.jpg" alt="" width="90px">
         </div>
         <ul>
             <li><a href="/ThesisAdvisorHub/home">Home</a></li>
@@ -66,6 +68,7 @@
 <?php
     
     require('../server.php');
+    require('../PHPMailer.php');
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -125,48 +128,11 @@
                     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
                     $sql = "INSERT INTO student(username, password, email, verified, token, role) VALUES('$username', '$hashPassword', '$email', '0', '$token', 'student')";
                     $result = mysqli_query($conn, $sql);
+                    sendEmail($token,$username);
                     header('location: /ThesisAdvisorHub/login');
                 }
             }
         }
-        
-
-        require '../vendor/autoload.php';
-
-        $mail = new PHPMailer(true);
-
-        try {
-            
-
-            // ตั้งค่าการเชื่อมต่อ SMTP
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'harry.sgy24@gmail.com'; // ใส่อีเมลของคุณ
-            $mail->Password = 'flue swzk aqjt hhgg';   // ใส่ App Password
-            $mail->SMTPSecure = "tls";
-            $mail->Port = 587;
-
-            // ตั้งค่าผู้ส่งและผู้รับ
-            $mail->setFrom('harry.sgy24@gmail.com', 'Sender Name');
-            $mail->addAddress('jakkritu65@nu.ac.th', 'Receive');
-
-            // ตั้งค่าอีเมล
-            $mail->isHTML(true);
-            $mail->Subject = 'Verify Your Email';
-            $verificationLink = "http://localhost/ThesisAdvisorHub/verify?token=$token";
-            $mail->Body = "<h1>Thank you for registering!</h1>
-                        <p>Please click the link below to verify your email:</p>
-                        <a href='$verificationLink'>Verify Email</a>";
-            $mail->AltBody = "Please visit the following link to verify your email: $verificationLink";
-
-            // ส่งอีเมล
-            $mail->send();
-            echo 'Email has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
     }
-    
     
 ?>

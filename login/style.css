@@ -58,7 +58,7 @@ form{
     padding: 4rem;
     border-radius: 1rem;
     text-align: center;
-    height: 350px ;
+    height: 380px ;
 }
 
 form i{
@@ -90,20 +90,6 @@ form i{
     outline: none;
 }
 
-.inputRad{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3rem;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-}
-
-.wrapRad{
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
 .buttonWrap{
     margin-top: 2.5rem;
     display: flex;
@@ -128,8 +114,20 @@ form i{
 .errorMessage h3{
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     color: red;
+    font-weight: 450;
 }
 
 .bxs-user-circle{
     color: rgb(67, 67, 67);
+}
+
+.resend{
+    border: none;
+    background-color: white;
+    color: green;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 450;
+    text-decoration: none;
 }
