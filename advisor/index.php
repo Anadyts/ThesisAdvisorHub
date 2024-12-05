@@ -5,6 +5,10 @@
         header('location: /ThesisAdvisorHub/login');
     }
 
+    if(empty($_SESSION['username'])){
+        header('location: /ThesisAdvisorHub/login');
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
