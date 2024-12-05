@@ -30,7 +30,7 @@
 
     <div class="wrap">
         <form action="" method="post">
-            <i class='bx bxs-user-circle' ></i>
+            <i class='bx bxs-registered'></i>
             <div class="inputWrap">
                 <input type="text" placeholder="Username" name="username" required> 
             </div>
