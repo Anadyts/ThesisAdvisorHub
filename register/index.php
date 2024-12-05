@@ -45,7 +45,7 @@
             </div>
 
             <div class="inputWrap">
-                <input type="email" placeholder="Email" name="email" required> 
+                <input type="email" placeholder="Naresuan University Email" name="email" required> 
             </div>
 
             <div class="buttonWrap">
@@ -85,9 +85,9 @@
             list($localPart, $domain) = explode('@', $email);
             
             if ($domain === "nu.ac.th" && !preg_match('/\d/', $localPart)) {
-
                 $role = 'advisor';
-            }else{
+            }elseif($domain === "nu.ac.th" && preg_match('/\d/', $localPart)){
+                echo 'student';
                 $role = 'student';
             }
 
@@ -107,10 +107,11 @@
                     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
                     $sql = "INSERT INTO advisor(username, password, email, verified, token, role) VALUES('$username', '$hashPassword', '$email', '0', '$token', 'advisor')";
                     $result = mysqli_query($conn, $sql);
+                    sendEmail($token,$username);
                     header('location: /ThesisAdvisorHub/login');
                 }
 
-            }else{
+            }elseif($role == 'student'){
                 $sql = "SELECT username FROM advisor WHERE username = '$username' 
                         UNION SELECT username FROM student WHERE username = '$username'";
                 $result = $conn->query($sql);
@@ -129,8 +130,12 @@
                     $sql = "INSERT INTO student(username, password, email, verified, token, role) VALUES('$username', '$hashPassword', '$email', '0', '$token', 'student')";
                     $result = mysqli_query($conn, $sql);
                     sendEmail($token,$username);
+                    echo 'student';
                     header('location: /ThesisAdvisorHub/login');
                 }
+            }else{
+                $_SESSION['error'] = "Please use a Naresuan University email address.";
+                header('location: /ThesisAdvisorHub/register');
             }
         }
     }

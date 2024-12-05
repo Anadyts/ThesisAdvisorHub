@@ -44,7 +44,6 @@
                     echo "<div class='dropdown'>
                             <form action='' method='post'>
                                 <button name='profile'>Profile</button>
-                                <button name='history'>History</button>
                                 <button name='logout'>Logout</button>
                             </form>
                         </div>";
