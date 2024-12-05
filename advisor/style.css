@@ -1,0 +1,170 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+nav{
+    display: flex;
+    align-items: center;
+    
+    background-color: rgb(255, 121, 54);
+}
+
+nav img{
+    margin:1rem;
+    margin-left: 5rem;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav li{
+    margin: 1rem;
+    list-style: none;
+    transition: .1s all ease;
+}
+
+li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.115);
+    transition: .1s all ease;
+}
+
+nav a:hover{
+    color: rgb(55, 55, 55);
+}
+
+nav li:hover{
+    transform: scale(1.1);
+
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
+
+.search input{
+    width: 500px;
+    height: 50px;
+    border-radius: 3rem;
+    border: none;
+    padding-left: 2rem;
+    background-color: rgb(255, 255, 255);
+    transition: all .2s ease;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.041);
+}
+
+.search input:hover{
+    transform: scale(1.01);
+}
+
+.search input:focus{
+    outline: none;
+}
+
+
+.search button{
+    border-radius: 3rem;
+    border: none;
+    width: 55px;
+    height: 50px;
+    transition: all .2s ease;
+    background-color: rgb(255, 121, 54);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.041);
+}
+
+.search button:hover{
+    background-color: rgb(255, 85, 0);
+    transform: scale(1.05);
+
+}
+
+.search select{
+    border-radius: 2rem;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    border:none;
+    padding-left: 1rem;
+    transition: all .2s ease;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 13px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.115);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.041);
+}
+
+.search select:hover{
+    transform: scale(1.02);
+}
+
+.search select:focus{
+    outline: none;
+}
+
+.advisorList{
+    margin-left: 15rem ;
+    margin-right: 15rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    
+}
+
+
+.advisorCard{
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    width: 320px;
+    height: 600px;
+    margin-bottom: 3rem;
+    transition: all .1s ease;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.041);
+
+}
+
+.advisorCard:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.041);
+}
+
+.advisorList img{
+    width: 320px;
+    height: 410px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.details{
+    text-align: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.advisorCard button{
+    font-weight: bold;
+    border: none;
+    border-radius: 3rem;
+    width: 40px;
+    height: 40px;
+    transition: all .1s ease;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.advisorCard button:hover{
+    transform: scale(1.2);
+}
+
+.bx-info-circle{
+    font-size: 25px;
+}

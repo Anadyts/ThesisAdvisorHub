@@ -1,0 +1,135 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+nav{
+    display: flex;
+    align-items: center;
+    
+    background-color: rgb(255, 121, 54);
+}
+
+nav img{
+    margin:1rem;
+    margin-left: 5rem;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav li{
+    margin: 1rem;
+    list-style: none;
+    transition: .1s all ease;
+}
+
+li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.115);
+    transition: .1s all ease;
+}
+
+nav a:hover{
+    color: rgb(55, 55, 55);
+}
+
+nav li:hover{
+    transform: scale(1.1);
+
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+form{
+    background-color: white;
+    padding: 4rem;
+    border-radius: 1rem;
+    text-align: center;
+    height: 580px ;
+}
+
+form i{
+    font-size: 80px;
+    
+}
+
+.inputWrap{
+    margin-top: 3rem;
+}
+
+.inputWrap input{
+    border: none;
+    width: 300px;
+    height: 50px;
+    background-color: whitesmoke;
+    padding-left: 1.5rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    transition: all .1s ease;
+}
+
+.inputWrap input:hover{
+    background-color: rgb(227, 227, 227);
+    transform: scale(1.02);
+}
+
+.inputWrap input:focus{
+    outline: none;
+}
+
+.inputRad{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.wrapRad{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.buttonWrap{
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.buttonWrap button{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    transition: all .2s ease;
+}
+
+.buttonWrap button:hover{
+    background-color: rgb(255, 89, 0);
+    transform: scale(1.1);
+
+}
+
+.errorMessage h3{
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: red;
+}
+
+.bxs-user-circle{
+    color: rgb(67, 67, 67);
+}
