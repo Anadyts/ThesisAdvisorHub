@@ -1,13 +1,8 @@
 <?php
     session_start();
-    
     if(isset($_POST['logout'])){
         session_destroy();
         header('location: /ThesisAdvisorHub/login');
-    }
-
-    if(isset($_POST['profile'])){
-        header('location: /ThesisAdvisorHub/profile');
     }
 
 ?>
