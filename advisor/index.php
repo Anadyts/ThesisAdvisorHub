@@ -15,6 +15,9 @@
         header('location: /ThesisAdvisorHub/profile');
     }
 
+
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +75,7 @@
             $sql = "SELECT * FROM advisor_profile";
             $result = $conn->query($sql);
             while($row = $result->fetch_assoc()){
+                $id = $row['id'];
                 $name = $row['name'];
                 $department = $row['department'];
                 $email = $row['email'];
@@ -90,8 +94,8 @@
                         <p>$name</p>
                         <p>$department</p>
                         <p>Email : $email</p>
-                        <form action='' method='post'>
-                            <button name='info'><i class='bx bx-info-circle'></i></button>
+                        <form action='../info/index.php' method='post'>
+                            <button name='info' value='$id'><i class='bx bx-info-circle'></i></button>
                         </form>
                     </div>
                 </div>
