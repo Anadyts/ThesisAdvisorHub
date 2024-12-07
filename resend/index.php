@@ -55,7 +55,6 @@
 
     <div class="wrap">
         <form action="" method="post">
-
             <div class="inputWrap">
                 <input type="text" placeholder="Username" name="username" required> 
             </div>
@@ -86,7 +85,10 @@
                 ?>
             </div>
         </form>
-    
+    </div>    
+    <footer>
+        <p>&copy; 2024 Naresuan University.</p>
+    </footer>
 </body>
 </html>
 

@@ -134,3 +134,16 @@ form i{
 .bxs-registered{
     color: rgb(67, 67, 67);
 }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+footer p {
+    color: #777;
+    font-size: 0.9rem;
+}

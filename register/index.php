@@ -61,6 +61,9 @@
             </div>
         </form>
     </div>
+    <footer>
+        <p>&copy; 2024 Naresuan University.</p>
+    </footer>
 </body>
 </html>
 
@@ -107,7 +110,7 @@
                     $sql = "INSERT INTO advisor(username, password, email, verified, token, role) VALUES('$username', '$hashPassword', '$email', '0', '$token', 'advisor')";
                     $result = mysqli_query($conn, $sql);
                     sendEmail($token,$username);
-                    header('location: /ThesisAdvisorHub/login');
+                    header('location: /ThesisAdvisorHub/after_register');
                 }
 
             }elseif($role == 'student'){
@@ -130,7 +133,7 @@
                     $result = mysqli_query($conn, $sql);
                     sendEmail($token,$username);
                     echo 'student';
-                    header('location: /ThesisAdvisorHub/login');
+                    header('location: /ThesisAdvisorHub/after_register');
                 }
             }else{
                 $_SESSION['error'] = "Please use a Naresuan University email address.";
