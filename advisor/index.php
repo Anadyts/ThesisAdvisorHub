@@ -15,9 +15,11 @@
         header('location: /ThesisAdvisorHub/profile');
     }
 
-
-    
-
+    // ถ้ามีการค้นหา
+    $search_query = "";
+    if(isset($_POST['search'])){
+        $search_query = $_POST['search'];  // รับค่าคำค้นจากฟอร์ม
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +30,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 </head>
 <body>
     <nav>
@@ -65,41 +66,52 @@
     </nav>
     <div class="search">
         <form action="" method="post">
-            <input type="text" name="search" placeholder="Search Advisor...">
+            <input type="text" name="search" placeholder="Search Advisor..." value="<?php echo htmlspecialchars($search_query); ?>">
             <button><i class='bx bx-search'></i></button>
         </form>
     </div>
 
     <div class="advisorList">
         <?php
-            $sql = "SELECT * FROM advisor_profile";
-            $result = $conn->query($sql);
-            while($row = $result->fetch_assoc()){
-                $id = $row['id'];
-                $name = $row['name'];
-                $department = $row['department'];
-                $email = $row['email'];
-                $tel = $row['tel'];
-                $research_topic = $row['research_topic'];
-                $research_info = $row['research_info'];
-                $other_info = $row['other_info'];
-                $student_amount = $row['student_amount'];
-                $img = $row['img'];
+            // การค้นหาด้วยคำที่ผู้ใช้กรอก
+            if($search_query != ""){
+                // คำค้นหามีการใส่เข้ามา
+                $sql = "SELECT * FROM advisor_profile WHERE name LIKE '%$search_query%' OR department LIKE '%$search_query%' OR research_topic LIKE '%$search_query%'";
+            } else {
+                // หากไม่มีคำค้นหาให้ดึงข้อมูลทั้งหมด
+                $sql = "SELECT * FROM advisor_profile";
+            }
 
-                echo 
-                "
-                <div class='advisorCard'>
-                    <img src='$img' alt=''>
-                    <div class='details'>
-                        <p>$name</p>
-                        <p>$department</p>
-                        <p>Email : $email</p>
-                        <form action='../info/index.php' method='post'>
-                            <button name='info' value='$id'><i class='bx bx-info-circle'></i></button>
-                        </form>
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()){
+                    $id = $row['id'];
+                    $name = $row['name'];
+                    $department = $row['department'];
+                    $email = $row['email'];
+                    $tel = $row['tel'];
+                    $research_topic = $row['research_topic'];
+                    $research_info = $row['research_info'];
+                    $other_info = $row['other_info'];
+                    $student_amount = $row['student_amount'];
+                    $img = $row['img'];
+
+                    echo "
+                    <div class='advisorCard'>
+                        <img src='$img' alt=''>
+                        <div class='details'>
+                            <p>$name</p>
+                            <p>$department</p>
+                            <p>Email : $email</p>
+                            <form action='../info/index.php' method='post'>
+                                <button name='info' value='$id'><i class='bx bx-info-circle'></i></button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                ";
+                    ";
+                }
+            } else {
+                echo "<p>No advisors found matching your search criteria.</p>";
             }
         ?>
     </div>

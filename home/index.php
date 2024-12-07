@@ -60,8 +60,40 @@
             ?>
         </div>
     </nav>
+    <img src="nu.jpg" alt="" width="100%">
+
     <footer>
-        <p>&copy; 2024 Naresuan University.</p>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>เกี่ยวกับเรา</h3>
+                    <p>ThesisAdvisorHub เป็นเว็บไซต์ที่ช่วยให้นักศึกษาและผู้ที่ต้องการคำปรึกษาในการวิจัยสามารถค้นหาและติดต่ออาจารย์ที่ปรึกษาได้สะดวกมากขึ้น</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>ติดต่อเรา</h3>
+                    <ul>
+                        <li> <a href="mailto:contact@advisorhub.com">ThesisAdvisorHub@gmail.com</a></li>
+                        <li>055-123-4561</li>
+                        <li> มหาวิทยาลัยนเรศวร, ตำบลบางกระทุ่ม, อำเภอเมือง, จังหวัดพิษณุโลก</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>ติดตามเรา</h3>
+                    <ul>
+                        <li><a href="#"><i class='bx bxl-facebook-circle'></i></a></li>
+                        <li><a href="#"><i class='bx bxl-twitter'></i></a></li>
+                        <li><a href="#"><i class='bx bxl-instagram-alt' ></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Advisor Hub | All Rights Reserved</p>
+        </div>
     </footer>
 </body>
 </html>
