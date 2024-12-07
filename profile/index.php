@@ -14,6 +14,36 @@
         header('location: /ThesisAdvisorHub/edit_profile');
     }
 
+    if (isset($_POST['delete'])) {
+        // รับ id จาก session
+        $id = $_SESSION['id'];
+    
+        // 1. ค้นหาข้อมูลไฟล์รูปภาพจากฐานข้อมูลก่อนการลบ
+        $sql = "SELECT img FROM advisor_profile WHERE user_id = '$id'";
+        $result = $conn->query($sql);
+    
+        // ตรวจสอบว่าได้ผลลัพธ์หรือไม่
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $img = $row['img'];  // ไฟล์รูปภาพที่ต้องการลบ
+    
+            // 2. ลบไฟล์จากเซิร์ฟเวอร์
+            if (file_exists($img)) {
+                unlink($img);  // ลบไฟล์จากเซิร์ฟเวอร์
+            }
+        }
+    
+        // 3. ลบข้อมูลจากฐานข้อมูล
+        $sql_delete = "DELETE FROM advisor_profile WHERE user_id = '$id'";
+        if ($conn->query($sql_delete)) {
+            // ถ้าลบข้อมูลสำเร็จ, สามารถทำสิ่งอื่นๆ เช่น redirect
+            header('location: /ThesisAdvisorHub/profile');
+            exit;
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+    }
+
     if (isset($_POST['submit'])) {
         // รับค่าจากฟอร์ม
         $id = $_SESSION['id'];
@@ -185,7 +215,8 @@
                         <h3>Number of students available for advising: $student_amount</h3>
                     </div>
                     <form action='' method='post' class='editForm'>
-                        <button name='edit'>Edit</button>
+                        <button name='edit' class='edit'>Edit</button>
+                        <button name='delete' class='delete'>Delete</button>
                     </form>
                 </div>
                 ";

@@ -332,10 +332,11 @@ footer p {
     justify-content: end;
 }
 
-.editForm button{
+.editForm .edit{
+    margin: 3px;
     border: none;
     border-radius: 10px;
-    background-color: rgb(255, 30, 30);
+    background-color: rgb(255, 170, 0);
     width: 80px;
     height: 40px;
     color: white;
@@ -345,8 +346,28 @@ footer p {
     box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.096);
 }
 
-.editForm button:hover{
+.editForm .edit:hover{
     transform: scale(1.03);
-    background-color: #ff1111;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.096);
+}
+
+
+.delete{
+    margin: 3px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(255, 25, 25);
+    width: 80px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .1s ease;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.096);
+}
+
+.editForm .delete:hover{
+    transform: scale(1.03);
+    background-color: #ff0000;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.096);
 }
