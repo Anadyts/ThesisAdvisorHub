@@ -82,17 +82,17 @@
                 <div class="footer-social">
                     <h3>ติดตามเรา</h3>
                     <ul>
-                        <li><a href="#"><i class='bx bxl-facebook-circle'></i></a></li>
+                        <li><a href="https://www.facebook.com/nu.university"><i class='bx bxl-facebook-circle'></i></a></li>
                         <li><a href="#"><i class='bx bxl-twitter'></i></a></li>
                         <li><a href="#"><i class='bx bxl-instagram-alt' ></i></a></li>
                     </ul>
                 </div>
             </div>
 
-            
+
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Advisor Hub | All Rights Reserved</p>
+            <p>&copy; 2024 ThesisAdvisorHub | All Rights Reserved</p>
         </div>
     </footer>
 </body>

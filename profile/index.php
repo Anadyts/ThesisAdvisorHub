@@ -200,17 +200,17 @@
 
                     
                     <div class='contact-info'>
-                        <h3>ข้อมูลการติดต่อ</h3>
+                        <h3>Contact</h3>
                         <p><strong>Email:</strong> $email</p>
-                        <p><strong>เบอร์โทร:</strong> $tel</p>
+                        <p><strong>Telephone Number:</strong> $tel</p>
                         </div>
 
                         <!-- ข้อมูลหัวข้อวิจัย -->
                         <div class='research-info'>
-                        <h3>หัวข้อวิจัย</h3>
+                        <h3>Research Topic</h3>
                         <p>$research_topic</p>
                         <p>" . nl2br($research_info) . "</p>
-                        <h3>อื่นๆ</h3>
+                        <h3>Other</h3>
                         <p>" . nl2br($other_info) . "</p>
                         <h3>Number of students available for advising: $student_amount</h3>
                     </div>
