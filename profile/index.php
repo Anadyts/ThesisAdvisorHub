@@ -123,11 +123,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advisor List</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link rel="icon" href="../Logo.jpg">
 </head>
 <body>
     <nav>
