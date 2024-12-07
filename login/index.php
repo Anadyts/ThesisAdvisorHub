@@ -70,6 +70,8 @@
 
         if(isset($row['username']) && password_verify($password, $row['password']) && $row['verified'] == 1){
             $_SESSION['username'] = $row['username'];
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['id'] = $row['id'];
             header('location: /ThesisAdvisorHub/advisor');
         }elseif(!password_verify($password, $row['password'])){
             $_SESSION['error'] = 'Username or password is incorrect';
