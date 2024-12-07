@@ -10,6 +10,10 @@
         header('location: /ThesisAdvisorHub/login');
     }
 
+    if(isset($_POST['edit'])){
+        header('location: /ThesisAdvisorHub/edit_profile');
+    }
+
     if (isset($_POST['submit'])) {
         // รับค่าจากฟอร์ม
         $id = $_SESSION['id'];
@@ -176,6 +180,7 @@
                         <h3>หัวข้อวิจัย</h3>
                         <p>$research_topic</p>
                         <p>" . nl2br($research_info) . "</p>
+                        <h3>อื่นๆ</h3>
                         <p>" . nl2br($other_info) . "</p>
                         <h3>Number of students available for advising: $student_amount</h3>
                     </div>
@@ -253,7 +258,7 @@
             const fileName = e.target.files[0] ? e.target.files[0].name : "ไม่มีไฟล์เลือก";
             document.getElementById("fileName").textContent = fileName;
         });
-</script>
+    </script>
 </body>
 </html>
 
