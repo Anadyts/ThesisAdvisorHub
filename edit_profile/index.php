@@ -111,6 +111,37 @@
     }
     
 
+    if (isset($_POST['editStudentProfile'])) {
+        $user_id = $_SESSION['id'];
+        $name = $_POST['name'];
+        $student_id = $_POST['student_id'];
+        $department = $_POST['department'];
+        $email = $_POST['email'];
+        $tel = $_POST['tel'];
+        $research_topic = $_POST['research_topic'];
+        $other_info = $_POST['other_info'];
+
+        // คำสั่ง SQL สำหรับการอัพเดตข้อมูล
+        $sql_update = "UPDATE student_profile SET name = ?, student_id = ?, department = ?, email = ?, tel = ?, research_topic = ?, other_info = ? WHERE user_id = ?";
+
+        // เตรียมคำสั่ง SQL
+        if ($stmt = $conn->prepare($sql_update)) {
+            // ผูกค่าตัวแปรกับคำสั่ง SQL
+            $stmt->bind_param("ssssssss", $name, $student_id, $department, $email, $tel, $research_topic, $other_info, $user_id);
+
+            // Execute คำสั่ง SQL
+            if ($stmt->execute()) {
+                header('location: /ThesisAdvisorHub/profile');
+            } else {
+                echo "Error updating profile: " . $stmt->error;
+            }
+
+            // ปิด statement
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -229,6 +260,65 @@
 
                         <div class='wrapInput'>
                             <button name='edit'>Edit Profile</button>
+                        </div>
+                        
+                    </div>
+                </form>
+                ";
+            }else{
+                header('location: /ThesisAdvisorHub/profile');
+            }
+        }elseif($role == 'student'){
+            $user_id = $_SESSION['id'];
+            $sql = "SELECT * FROM student_profile WHERE user_id = '$id'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+
+
+            if(isset($row['id'])){
+                $name = $row['name'];
+                $student_id = $row['student_id'];
+                $department = $row['department'];
+                $email = $row['email'];
+                $tel = $row['tel'];
+                $research_topic = $row['research_topic'];
+                $other_info = $row['other_info'];
+
+                echo 
+                "
+                <form action='' method='post' class='profile-form' enctype='multipart/form-data'>
+                    <div class='wrap'>
+                        <h2>Student Profile</h2>
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Name' name='name' value='$name' required>
+                        </div>
+
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Student ID' name='student_id' value='$student_id' required>
+                        </div>
+
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Department' name='department' value='$department' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='email' placeholder='Contact Email' name='email' value='$email' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='tel' placeholder='Telephone' name='tel' value='$tel' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Interested research topics' name='research_topic' value='$research_topic' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <textarea name='other_info' id='' placeholder='Other' required>$other_info</textarea>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <button name='editStudentProfile'>Edit</button>
                         </div>
                         
                     </div>

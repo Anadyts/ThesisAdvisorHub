@@ -36,7 +36,6 @@
         // 3. ลบข้อมูลจากฐานข้อมูล
         $sql_delete = "DELETE FROM advisor_profile WHERE user_id = '$id'";
         if ($conn->query($sql_delete)) {
-            // ถ้าลบข้อมูลสำเร็จ, สามารถทำสิ่งอื่นๆ เช่น redirect
             header('location: /ThesisAdvisorHub/profile');
             exit;
         } else {
@@ -114,6 +113,47 @@
         // ปิดการเชื่อมต่อ
         $conn->close();
         
+    }
+
+    if(isset($_POST['addStudentProfile'])){
+        $user_id = $_SESSION['id'];
+        $name = $_POST['name'];
+        $student_id = $_POST['student_id'];
+        $department = $_POST['department'];
+        $email = $_POST['email'];
+        $tel = $_POST['tel'];
+        $research_topic = $_POST['research_topic'];
+        $other_info = $_POST['other_info'];
+
+        $sql = "INSERT INTO student_profile (user_id, name, student_id, department, email, tel, research_topic, other_info)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // เตรียม statement
+        if ($stmt = $conn->prepare($sql)) {
+            // ผูกค่าตัวแปรกับคำสั่ง SQL
+            $stmt->bind_param("ssssssss", $user_id, $name, $student_id, $department, $email, $tel, $research_topic, $other_info);
+            
+            // Execute คำสั่ง SQL
+            if ($stmt->execute()) {
+                header('location: /ThesisAdvisorHub/profile');
+            } else {
+                echo "Error saving student profile: " . $stmt->error;
+            }
+
+            // ปิด statement
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+    }
+
+    if(isset($_POST['deleteStudentProfile'])){
+        $user_id = $_SESSION['id'];
+        $sql = "DELETE FROM student_profile WHERE '$user_id'";
+
+        if($conn->query($sql)){
+            header('location: /ThesisAdvisorHub/profile');
+        }
     }
 
 ?>
@@ -235,7 +275,7 @@
                         </div>
                         
                         <div class='wrapInput'>
-                            <input type='email' placeholder='Email Contact' name='email' required>
+                            <input type='email' placeholder='Contact Email' name='email' required>
                         </div>
                         
                         <div class='wrapInput'>
@@ -275,6 +315,88 @@
             }
         }else{
             $sql = "SELECT * FROM student_profile WHERE user_id = '$id'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+
+            if(isset($row['id'])){
+                $name = $row['name'];
+                $department = $row['department'];
+                $email = $row['email'];
+                $tel = $row['tel'];
+                $research_topic = $row['research_topic'];
+                $other_info = $row['other_info'];
+
+                echo 
+                "
+                <div class='container'>
+                    
+                    <div class='profile-info'>
+                    <h2>$name</h2>
+                    <p>Department $department</p>
+                    </div>
+
+                    
+                    <div class='contact-info'>
+                        <h3>Contact</h3>
+                        <p><strong>Email:</strong> $email</p>
+                        <p><strong>Telephone Number:</strong> $tel</p>
+                        </div>
+
+                        <!-- ข้อมูลหัวข้อวิจัย -->
+                        <div class='research-info'>
+                        <h3>Interested research topics</h3>
+                        <p>$research_topic</p>
+                        <h3>Other</h3>
+                        <p>" . nl2br($other_info) . "</p>
+                    </div>
+                    <form action='' method='post' class='editForm'>
+                        <button name='edit' class='edit'>Edit</button>
+                        <button name='deleteStudentProfile' class='delete'>Delete</button>
+                    </form>
+                </div>
+                ";
+            }else{
+                echo 
+                "
+                <form action='' method='post' class='profile-form' enctype='multipart/form-data'>
+                    <div class='wrap'>
+                        <h2>Student Profile</h2>
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Name' name='name' required>
+                        </div>
+
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Student ID' name='student_id' required>
+                        </div>
+
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Department' name='department' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='email' placeholder='Contact Email' name='email' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='tel' placeholder='Telephone' name='tel' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <input type='text' placeholder='Interested research topics' name='research_topic' required>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <textarea name='other_info' id='' placeholder='Other' required></textarea>
+                        </div>
+                        
+                        <div class='wrapInput'>
+                            <button name='addStudentProfile'>Add Profile</button>
+                        </div>
+                        
+                    </div>
+                </form>
+                ";
+            }
         }
     
     
