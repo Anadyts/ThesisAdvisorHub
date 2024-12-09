@@ -40,14 +40,7 @@
         <ul>
             <li><a href="/ThesisAdvisorHub/home">Home</a></li>
             <li><a href="/ThesisAdvisorHub/advisor">Advisor</a></li>
-            <?php
-                if(empty($_SESSION['username'])){
-                    echo "
-                        <li><a href='/ThesisAdvisorHub/login'>Login</a></li>
-                        <li><a href='/ThesisAdvisorHub/register'>Register</a></li>
-                    ";
-                }
-            ?>
+            <li><a href="/ThesisAdvisorHub/inbox">Inbox</a></li>
         </ul>
         
         <div class="userProfile">

@@ -31,7 +31,6 @@
         </div>
         <ul>
             <li><a href="/ThesisAdvisorHub/home">Home</a></li>
-            <li><a href="/ThesisAdvisorHub/advisor">Advisor</a></li>
             <li><a href="/ThesisAdvisorHub/login">Login</a></li>
             <li><a href="/ThesisAdvisorHub/register">Register</a></li>
         </ul>

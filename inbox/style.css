@@ -1,0 +1,246 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+nav{
+    display: flex;
+    align-items: center;
+    
+    background-color: rgb(255, 121, 54);
+}
+
+nav img{
+    margin:1rem;
+    margin-left: 5rem;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav li{
+    margin: 1rem;
+    list-style: none;
+    transition: .1s all ease;
+}
+
+li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.115);
+    transition: .1s all ease;
+}
+
+nav a:hover{
+    color: rgb(55, 55, 55);
+}
+
+nav li:hover{
+    transform: scale(1.1);
+
+}
+
+.userProfile {
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: bold;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.115);
+    margin-left: auto; 
+    margin-right: 5rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bxs-user-circle{
+    font-size: 60px;
+    margin: 15px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.dropdown{
+    width: 100px;
+    height: 80px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 60%;
+    right: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.107);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    text-align: center;
+    display: none;
+
+}
+
+.dropdown button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: .1s all ease;
+}
+
+.dropdown button:hover{
+    transform: scale(1.02);
+    color: red;
+}
+
+.userProfile:hover .dropdown{
+    display: block;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 20px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+footer p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.inbox-container {
+    display: flex;
+    height: 100vh;
+    margin: 3rem;
+    
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: #ffffff;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.sidebar-item {
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+    background-color: #f1f1f1;
+}
+
+.sidebar-item.active {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Content area */
+.content {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+/* Header section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Message list */
+.message-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.message:hover {
+    background-color: #f9f9f9;
+}
+
+.message-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #333;
+}
+
+.message-subject {
+    color: #666;
+    font-size: 14px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #999;
+}

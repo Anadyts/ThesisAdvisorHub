@@ -41,6 +41,7 @@
                 }else{
                     echo "
                         <li><a href='/ThesisAdvisorHub/advisor'>Advisor</a></li>
+                        <li><a href='/ThesisAdvisorHub/inbox'>Inbox</a></li>
                     ";
                 }
             ?>
