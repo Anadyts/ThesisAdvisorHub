@@ -137,10 +137,12 @@ footer p {
 
 /* Chat header */
 .chat-header {
-    background-color: #7a7a7a;
+    background-color: #3c3c3c;
     color: #fff;
     padding: 15px;
     text-align: center;
+    color: rgb(255, 255, 255);
+    
 }
 
 /* Chat box */
@@ -186,10 +188,11 @@ footer p {
     border-radius: 10px;
     font-size: 14px;
     line-height: 1.4;
+
 }
 
 .message-sent {
-    background-color: #535353;
+    background-color: #525252;
     color: white;
     align-self: flex-end;
 }
@@ -225,12 +228,12 @@ footer p {
 }
 
 .input-message:focus {
-    border-color: #007BFF;
+    outline: none;
 }
 
 .send-button {
     padding: 10px 15px;
-    background-color: #2a2a2a;
+    background-color: #3c3c3c;
     color: white;
     border: none;
     border-radius: 1rem;
@@ -239,7 +242,7 @@ footer p {
 }
 
 .send-button:hover {
-    background-color: #0056b3;
+    background-color: #202020;
 }
 
 .scroll-to-bottom{
@@ -258,3 +261,4 @@ footer p {
 .bx-down-arrow-alt{
     font-size: 20px;
 }
+

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ส่งข้อความเมื่อกดปุ่มส่ง
     form.addEventListener('submit', (e) => {
-        e.preventDefault();
+        
 
         const message = messageInput.value;
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleScroll() {
     var chatBox = document.querySelector('.chat-box');
     var scrollButton = document.querySelector('.scroll-to-bottom');
-    var threshold = 300; // 50px from the bottom
+    var threshold = 300; 
 
     // Check if the user is close enough to the bottom (within the threshold)
     if (chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight <= threshold) {

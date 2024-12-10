@@ -5,14 +5,23 @@
     if(isset($_POST['logout'])){
         session_destroy();
         header('location: /ThesisAdvisorHub/login');
+        exit();
     }
 
     if(empty($_SESSION['username'])){
         header('location: /ThesisAdvisorHub/login');
+        exit();
     }
 
     if(isset($_POST['profile'])){
         header('location: /ThesisAdvisorHub/profile');
+        exit();
+    }
+
+    if(isset($_POST['chat'])){
+        $_SESSION['receiver_id'] = $_POST['chat'];
+        header('location: /ThesisAdvisorHub/chat');
+        exit();
     }
 
 ?>
@@ -63,7 +72,17 @@
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
 
-            $advisorUsername = $row['name'];
+            if(isset($row['name'])){
+                $advisorUsername = $row['name'];
+                
+            }else{
+                $sql = "SELECT * FROM student WHERE id = '$receiver_id'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $advisorUsername = $row['username'];
+            }
+            
+
             if(isset($_POST['send'])){
                 $message = $_POST['message'];
                 $sql = "INSERT INTO messages(sender_id, receiver_id, message) VALUES('$sender_id', '$receiver_id', '$message')";
@@ -116,7 +135,7 @@
             "
                         </div>
                     </div>
-                    <form action='' method='post'>
+                    <form action='' method='post' class='form-send'>
                         <div class='chat-input'>
                             <input type='text' class='input-message' name='message' placeholder='Type a message...' />
                             <button class='send-button' name='send'>Send</button>

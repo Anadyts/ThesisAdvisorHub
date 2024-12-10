@@ -15,6 +15,10 @@
         header('location: /ThesisAdvisorHub/profile');
     }
 
+    if(isset($_POST['chat'])){
+        $_SESSION['receiver_id'] = $_POST['chat'];
+        header('location: /ThesisAdvisorHub/chat');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -54,50 +58,76 @@
             ?>
         </div>
     </nav>
-
     <div class="inbox-container">
-        <div class="sidebar">
-            <div class="sidebar-item active">Inbox</div>
-            <div class="sidebar-item">Sent</div>
-            <div class="sidebar-item">Drafts</div>
-            <div class="sidebar-item">Spam</div>
-            <div class="sidebar-item">Trash</div>
+        <div class="inbox-head">
+            <h2>Inbox</h2>
         </div>
+        <div class="inbox">
 
-        <div class="content">
-            <div class="header">
-                <input type="text" class="search-input" placeholder="Search messages...">
-                <button class="btn new-message">New Message</button>
-            </div>
-            
-            <div class="message-list">
-                <div class="message">
-                    <div class="message-info">
-                        <div class="message-sender">John Doe</div>
-                        <div class="message-subject">Meeting Tomorrow</div>
-                    </div>
-                    <div class="message-time">12:30 PM</div>
-                </div>
+        <?php
+            $user_id = $_SESSION['id'];
+
+            $sql = "SELECT DISTINCT receiver_id FROM messages WHERE sender_id = $user_id UNION
+                    SELECT DISTINCT sender_id FROM messages WHERE receiver_id = $user_id ";
+            $result = $conn->query($sql);
+
+            while($row = $result->fetch_assoc()){
                 
-                <div class="message">
-                    <div class="message-info">
-                        <div class="message-sender">Jane Smith</div>
-                        <div class="message-subject">Project Update</div>
-                    </div>
-                    <div class="message-time">2:00 PM</div>
-                </div>
+                if(isset($row['receiver_id'])){
+                    $receiver_id = $row['receiver_id'];
+                    $sql = "SELECT * FROM advisor WHERE id = '$receiver_id'";
+                    $result2 = $conn->query($sql);
+                    $row2 = $result2->fetch_assoc();
 
-                <div class="message">
-                    <div class="message-info">
-                        <div class="message-sender">Tommy Lee</div>
-                        <div class="message-subject">Weekend Plans</div>
-                    </div>
-                    <div class="message-time">3:45 PM</div>
-                </div>
-            </div>
-        </div>
+                    if(empty($row2['username'])){
+                        $sql = "SELECT * FROM student WHERE id = '$receiver_id'";
+                        $result4 = $conn->query($sql);
+                        $row4 = $result4->fetch_assoc();
+
+                        $username = $row4['username'];
+                        $chat_id = $row4['id'];
+                    }else{
+                        $username = $row2['username'];
+                        $chat_id = $row2['id'];
+                    }
+                    
+                    echo 
+                    "
+                    <div class='message'>
+                        <div class='sender'>$username</div>
+                            <form action='' method='post'>
+                                <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
+                            </form>
+                        </div>
+                    ";
+
+                }elseif(isset($row['sender_id'])){
+                    $sender_id = $row['sender_id'];
+                    $sql = "SELECT * FROM student WHERE id = '$sender_id'";
+                    $result3 = $conn->query($sql);
+                    $row3 = $result3->fetch_assoc();
+
+                    $username = $row3['username'];
+                    $chat_id = $row3['id'];
+
+                    echo 
+                    "
+                    <div class='message'>
+                        <div class='sender'>$username</div>
+                            <form action='' method='post'>
+                                <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
+                            </form>
+                        </div>
+                    ";
+                    
+                }
+            }
+
+        ?>
+        
+        
     </div>
-
+        
     <footer>
         <p>&copy; 2024 Naresuan University.</p>
     </footer>
