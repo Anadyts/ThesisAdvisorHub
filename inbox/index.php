@@ -95,8 +95,20 @@
                     "
                     <div class='message'>
                         <div class='sender'>$username</div>
-                            <form action='' method='post'>
+                            <form action='' method='post' class='form-chat'>
                                 <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
+                    ";
+
+                    $sqlReadCheck = "SELECT DISTINCT * FROM messages WHERE receiver_id = '$user_id' AND is_read = 0 AND sender_id = '$chat_id'";
+                    $resultReadCheck = $conn->query($sqlReadCheck);
+                    $rowReadCheck = $resultReadCheck->fetch_assoc();
+
+                    if(isset($rowReadCheck['id'])){
+                        echo "<i class='bx bxs-circle'></i>";
+                    }
+
+                    echo 
+                    "
                             </form>
                         </div>
                     ";
@@ -114,8 +126,20 @@
                     "
                     <div class='message'>
                         <div class='sender'>$username</div>
-                            <form action='' method='post'>
+                            <form action='' method='post' class='form-chat'>
                                 <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
+                    ";
+
+                    $sqlReadCheck = "SELECT DISTINCT * FROM messages WHERE receiver_id = '$user_id' AND is_read = 0 AND sender_id = '$chat_id'";
+                    $resultReadCheck = $conn->query($sqlReadCheck);
+                    $rowReadCheck = $resultReadCheck->fetch_assoc();
+
+                    if(isset($rowReadCheck['id'])){
+                        echo "<i class='bx bxs-circle'></i>";
+                    }
+
+                    echo 
+                    "
                             </form>
                         </div>
                     ";

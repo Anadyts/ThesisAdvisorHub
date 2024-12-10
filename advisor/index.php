@@ -67,16 +67,22 @@
 
     <div class="advisorList">
         <?php
-            // การค้นหาด้วยคำที่ผู้ใช้กรอก
-            if($search_query != ""){
+            // ป้องกัน SQL Injection ด้วย prepared statement
+            if($search_query != "") {
                 // คำค้นหามีการใส่เข้ามา
-                $sql = "SELECT * FROM advisor_profile WHERE name LIKE '%$search_query%' OR department LIKE '%$search_query%' OR research_topic LIKE '%$search_query%'";
+                $sql = "SELECT * FROM advisor_profile WHERE name LIKE ? OR department LIKE ? OR research_topic LIKE ?";
+                $stmt = $conn->prepare($sql);
+                $search_param = "%" . $search_query . "%";
+                $stmt->bind_param("sss", $search_param, $search_param, $search_param);
+                $stmt->execute();
+                $result = $stmt->get_result();
             } else {
                 // หากไม่มีคำค้นหาให้ดึงข้อมูลทั้งหมด
                 $sql = "SELECT * FROM advisor_profile";
+                $result = $conn->query($sql);
             }
 
-            $result = $conn->query($sql);
+
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()){
                     $id = $row['id'];

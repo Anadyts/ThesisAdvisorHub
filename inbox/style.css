@@ -236,3 +236,15 @@ color: #777;
     color: #545454;
     font-size: 25px;
 }
+
+.form-chat{
+    position: relative;
+}
+
+.bxs-circle{
+    color: red;
+    font-size: 10px;
+    position: absolute;
+    top: 15%;
+    left: 60%;
+}

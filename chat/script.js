@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleScroll() {
     var chatBox = document.querySelector('.chat-box');
     var scrollButton = document.querySelector('.scroll-to-bottom');
-    var threshold = 300; 
+    var threshold = 50; 
 
     // Check if the user is close enough to the bottom (within the threshold)
     if (chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight <= threshold) {

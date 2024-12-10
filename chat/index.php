@@ -63,10 +63,15 @@
             ?>
         </div>
     </nav>
+
     <?php
         if(isset($_SESSION['receiver_id'])){
             $receiver_id = $_SESSION['receiver_id'];
             $sender_id = $_SESSION['id'];
+
+            // เมื่ออ่านแล้วเอาเครื่องหมายยังไม่อ่านออก
+            $sql = "UPDATE messages SET is_read = 1 WHERE receiver_id = $sender_id AND sender_id = '$receiver_id' AND is_read = 0";
+            $result = $conn->query($sql);
 
             $sql = "SELECT * FROM advisor_profile WHERE user_id = '$receiver_id'";
             $result = $conn->query($sql);
@@ -74,24 +79,29 @@
 
             if(isset($row['name'])){
                 $advisorUsername = $row['name'];
-                
-            }else{
+            } else {
                 $sql = "SELECT * FROM student WHERE id = '$receiver_id'";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 $advisorUsername = $row['username'];
             }
-            
 
+            // ตรวจสอบว่ามีการส่งข้อความหรือไม่
             if(isset($_POST['send'])){
                 $message = $_POST['message'];
-                $sql = "INSERT INTO messages(sender_id, receiver_id, message) VALUES('$sender_id', '$receiver_id', '$message')";
-                $result = $conn->query($sql);
+
+                // ตรวจสอบว่า message ไม่ใช่ค่าว่าง
+                if (!empty($message)) {
+                    // ป้องกัน SQL Injection โดยใช้ mysqli_real_escape_string
+                    $message = $conn->real_escape_string($message);
+                    $sql = "INSERT INTO messages(sender_id, receiver_id, message) VALUES('$sender_id', '$receiver_id', '$message')";
+                    $result = $conn->query($sql);
+                } else {
+                    
+                }
             }
 
-            
-            echo 
-            "
+            echo "
                 <div class='chat-container'>
                     <div class='chat-header'>
                         <h2>$advisorUsername</h2>
@@ -99,40 +109,31 @@
                     <div class='chat-box'>
                         <div class='message-container'>
             ";
-            
+
             $sql = "SELECT * FROM messages WHERE receiver_id = '$receiver_id' AND sender_id = '$sender_id' UNION
                     SELECT * FROM messages WHERE receiver_id = '$sender_id' AND sender_id = '$receiver_id'
-                    ORDER BY timestamp ASC
-                    ";
+                    ORDER BY timestamp ASC";
             $result = $conn->query($sql);
 
             while($row = $result->fetch_assoc()){
                 $message = $row['message'];
                 $time = $row['timestamp'];
                 if($sender_id == $row['sender_id']){
-                    echo 
-                    "
-
+                    echo "
                     <div class='message message-sent'>
-                        <div class='message-content'>". nl2br($message) ."</div>
+                        <div class='message-content'>".  nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) ."</div>
                         <div class='message-time'>$time</div>
-                    </div>
-
-
-                    ";
-                }else{
-                    echo 
-                    "
+                    </div>";
+                } else {
+                    echo "
                     <div class='message message-received'>
-                        <div class='message-content'>". nl2br($message) ."</div>
+                        <div class='message-content'>".  nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) ."</div>
                         <div class='message-time'>$time</div>
-                    </div>
-                    ";
+                    </div>";
                 }
             }
 
-            echo 
-            "
+            echo "
                         </div>
                     </div>
                     <form action='' method='post' class='form-send'>
@@ -146,9 +147,7 @@
         }
     
     ?>
-    <button class="scroll-to-bottom" ><i class='bx bx-down-arrow-alt'></i></button>
-
-    
+    <button class="scroll-to-bottom"><i class='bx bx-down-arrow-alt'></i></button>
 
     </div>
     <footer>
