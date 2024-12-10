@@ -11,7 +11,9 @@
         header('location: /ThesisAdvisorHub/login');
     }
 
-    
+    if(isset($_POST['profile'])){
+        header('location: /ThesisAdvisorHub/profile');
+    }
 
 ?>
 
@@ -80,7 +82,9 @@
             ";
             
             $sql = "SELECT * FROM messages WHERE receiver_id = '$receiver_id' AND sender_id = '$sender_id' UNION
-                    SELECT * FROM messages WHERE receiver_id = '$sender_id' AND sender_id = '$receiver_id'";
+                    SELECT * FROM messages WHERE receiver_id = '$sender_id' AND sender_id = '$receiver_id'
+                    ORDER BY timestamp ASC
+                    ";
             $result = $conn->query($sql);
 
             while($row = $result->fetch_assoc()){
@@ -91,7 +95,7 @@
                     "
 
                     <div class='message message-sent'>
-                        <div class='message-content'>$message</div>
+                        <div class='message-content'>". nl2br($message) ."</div>
                         <div class='message-time'>$time</div>
                     </div>
 
@@ -101,7 +105,7 @@
                     echo 
                     "
                     <div class='message message-received'>
-                        <div class='message-content'>$message</div>
+                        <div class='message-content'>". nl2br($message) ."</div>
                         <div class='message-time'>$time</div>
                     </div>
                     ";
@@ -123,11 +127,14 @@
         }
     
     ?>
+    <button class="scroll-to-bottom" ><i class='bx bx-down-arrow-alt'></i></button>
+
     
-    
+
     </div>
     <footer>
         <p>&copy; 2024 Naresuan University.</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>

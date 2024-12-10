@@ -11,6 +11,10 @@
         header('location: /ThesisAdvisorHub/login');
     }
 
+    if(isset($_POST['profile'])){
+        header('location: /ThesisAdvisorHub/profile');
+    }
+
 ?>
 
 <!DOCTYPE html>

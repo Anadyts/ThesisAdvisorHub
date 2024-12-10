@@ -137,7 +137,7 @@ footer p {
 
 /* Chat header */
 .chat-header {
-    background-color: #007BFF;
+    background-color: #7a7a7a;
     color: #fff;
     padding: 15px;
     text-align: center;
@@ -146,10 +146,30 @@ footer p {
 /* Chat box */
 .chat-box {
     padding: 20px;
-    min-height: 600px;
-    max-height: 900px;
-    overflow-y: auto;
+    height: 600px; /* กำหนดความสูงคงที่ */
+    max-height: 600px; /* ความสูงสูงสุด */
+    overflow-y: auto; /* เปิดการเลื่อนในแนวตั้ง */
     background-color: #f9f9f9;
+    position: relative;
+}
+
+
+/* Custom scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }
 
 /* Message container */
@@ -169,7 +189,7 @@ footer p {
 }
 
 .message-sent {
-    background-color: #007BFF;
+    background-color: #535353;
     color: white;
     align-self: flex-end;
 }
@@ -210,7 +230,7 @@ footer p {
 
 .send-button {
     padding: 10px 15px;
-    background-color: #007BFF;
+    background-color: #2a2a2a;
     color: white;
     border: none;
     border-radius: 1rem;
@@ -220,4 +240,21 @@ footer p {
 
 .send-button:hover {
     background-color: #0056b3;
+}
+
+.scroll-to-bottom{
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 3rem;
+    background-color: white;
+    box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.159);
+    cursor: pointer;
+    position: absolute;
+    top: 85%;
+    left: 49%;
+}
+
+.bx-down-arrow-alt{
+    font-size: 20px;
 }
