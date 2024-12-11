@@ -1,8 +1,18 @@
 <?php
     session_start();
+    require ('../server.php');
+
     if(isset($_POST['logout'])){
         session_destroy();
         header('location: /ThesisAdvisorHub/login');
+    }
+
+    if(empty($_SESSION['username'])){
+        header('location: /ThesisAdvisorHub/login');
+    }
+
+    if(isset($_POST['profile'])){
+        header('location: /ThesisAdvisorHub/profile');
     }
 
 ?>
@@ -25,19 +35,8 @@
         </div>
         <ul>
             <li><a href="/ThesisAdvisorHub/home">Home</a></li>
-            
-            <?php
-                if(empty($_SESSION['username'])){
-                    echo "
-                        <li><a href='/ThesisAdvisorHub/login'>Login</a></li>
-                        <li><a href='/ThesisAdvisorHub/register'>Register</a></li>
-                    ";
-                }else{
-                    echo "
-                        <li><a href='/ThesisAdvisorHub/advisor'>Advisor</a></li>
-                    ";
-                }
-            ?>
+            <li><a href='/ThesisAdvisorHub/advisor'>Advisor</a></li>
+            <li><a href='/ThesisAdvisorHub/inbox'>Inbox</a></li>
         </ul>
 
         <div class="userProfile">
@@ -55,6 +54,61 @@
             ?>
         </div>
     </nav>
+
+    <?php
+        if(isset($_SESSION['profileInbox'])){
+            $advisor_id = $_SESSION['profileInbox'];
+            $sql = "SELECT * FROM advisor_profile WHERE user_id = '$advisor_id'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+
+            if(isset($row['id'])){
+                $user_id = $row['user_id'];
+                $name = $row['name'];
+                $department = $row['department'];
+                $email = $row['email'];
+                $tel = $row['tel'];
+                $research_topic = $row['research_topic'];
+                $research_info = $row['research_info'];
+                $other_info = $row['other_info'];
+                $img = $row['img'];
+                $student_amount = $row['student_amount'];
+                
+                echo 
+                "
+                <div class='container'>
+                        
+                        <div class='profile-info'>
+                        <img src= '$img' >
+                        <h2>$name</h2>
+                        <p>Department $department</p>
+                        </div>
+
+                        
+                        <div class='contact-info'>
+                            <h3>Contact</h3>
+                            <p><strong>Email:</strong> $email</p>
+                            <p><strong>Telephone Number:</strong> $tel</p>
+                            </div>
+
+                            <!-- ข้อมูลหัวข้อวิจัย -->
+                            <div class='research-info'>
+                            <h3>Research Topic</h3>
+                            <p>$research_topic</p>
+                            <p>" . nl2br($research_info) . "</p>
+                            <h3>Other</h3>
+                            <p>" . nl2br($other_info) . "</p>
+                            <h3>Number of students available for advising: $student_amount</h3>
+                        </div>
+                        
+                    </div>
+                    ";
+            }else{
+                echo "<h1>This user don't have profile</h1>";
+            }
+        }
     
+    ?>
+
 </body>
 </html>

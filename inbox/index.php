@@ -19,6 +19,22 @@
         $_SESSION['receiver_id'] = $_POST['chat'];
         header('location: /ThesisAdvisorHub/chat');
     }
+
+    if(isset($_POST['profileInbox'])){
+        $user_id = $_POST['profileInbox'];
+        $_SESSION['profileInbox'] = $user_id;
+        
+        $sql = "SELECT role FROM advisor WHERE id = '$user_id'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+
+        if($row['role'] == 'advisor'){
+            header('location: /ThesisAdvisorHub/advisor_profile');
+        }else{
+            header('location: /ThesisAdvisorHub/student_profile');
+        }
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +112,7 @@
                     <div class='message'>
                         <div class='sender'>$username</div>
                             <form action='' method='post' class='form-chat'>
+                                <button name='profileInbox' class='profileInbox' value='$chat_id'><i class='bx bxs-user-pin'></i></button>
                                 <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
                     ";
 
@@ -128,6 +145,7 @@
                         <div class='sender'>$username</div>
                             <form action='' method='post' class='form-chat'>
                                 <button name='chat' class='chat-button' value='$chat_id'><i class='bx bxs-message-dots'></i></button>
+                                <button name='profileInbox' value='$chat_id'><i class='bx bxs-user-pin'></i></button>
                     ";
 
                     $sqlReadCheck = "SELECT DISTINCT * FROM messages WHERE receiver_id = '$user_id' AND is_read = 0 AND sender_id = '$chat_id'";
