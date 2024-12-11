@@ -109,6 +109,8 @@
         }
     
     ?>
-
+    <footer>
+        <p>&copy; 2024 Naresuan University.</p>
+    </footer>
 </body>
 </html>
